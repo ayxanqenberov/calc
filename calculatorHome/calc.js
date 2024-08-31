@@ -2,32 +2,32 @@ const upperCalc = document.querySelector('.upperCalc');
 const buttons = document.querySelectorAll('.buttonInp');
 const clearing = document.querySelector('.clear')
 const equal = document.querySelector('.equal')
-let expression = '';
+let input = '';
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.value;
     if (value === '=') {
       try {
-        expression == upperCalc.value
+        input = new Function('return ' + input)();
+        upperCalc.textContent = input;
       } catch (error) {
         upperCalc.value = 'Error';
-        expression = '';
+        input = '';
       }
-    }else if (value == 'C') {
+      // if(upperCalc.includes("/")){
+      //   return upperCalc.value[0] / upperCalc[1]
+      // }
+    }else if (value === 'C') {
       getClear()
     } else {
-      expression += value;
-      upperCalc.value = expression;
+      input += value;
+      upperCalc.value = input;
     }
   });
 });
 clearing.addEventListener("click",getClear)
 function getClear(){
-  expression = '';
+  input = '';
   upperCalc.value = ''
-}
-equal.addEventListener("click", getResult)
-
-function getResult(){
 }
