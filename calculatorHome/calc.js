@@ -7,27 +7,22 @@ let input = '';
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.value;
-    if (value === '=') {
-      try {
-        input = new Function('return ' + input)();
-        upperCalc.textContent = input;
-      } catch (error) {
-        upperCalc.value = 'Error';
-        input = '';
-      }
-      // if(upperCalc.includes("/")){
-      //   return upperCalc.value[0] / upperCalc[1]
-      // }
-    }else if (value === 'C') {
+    if (value === 'C') {
       getClear()
-    } else {
+    } else if (value !== '=') {
       input += value;
       upperCalc.value = input;
     }
   });
 });
-clearing.addEventListener("click",getClear)
-function getClear(){
+
+equal.addEventListener('click', () => {
+  upperCalc.value = eval(upperCalc.value);
+});
+
+clearing.addEventListener("click", getClear)
+
+function getClear() {
   input = '';
   upperCalc.value = ''
 }
